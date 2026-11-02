@@ -55,9 +55,9 @@ export function createState(): WaterCannonState {
   return { targets, shots: [], splashes: [], tank: TANK_SIZE, score: 0, phase: 'playing' };
 }
 
-/** Faster targets are worth more: 10 points per 60 px/s, rounded up. */
+/** Slower targets are worth more: 10 points per 60 px/s under 240 px/s, rounded up, and at least 10. */
 export function scoreForHit(target: Target): number {
-  return 10 * Math.ceil(Math.abs(target.speed) / 60);
+  return 10 * Math.max(1, Math.ceil((240 - Math.abs(target.speed)) / 60));
 }
 
 export function isHit(shot: Shot, target: Target): boolean {
@@ -202,7 +202,7 @@ function draw(
 export const waterCannon: CarnivalGame = {
   id: 'water-cannon',
   name: 'Water Cannon',
-  description: 'Soak the targets before your tank runs dry. Faster targets score more.',
+  description: 'Soak the targets before your tank runs dry. The big, slow targets score most.',
 
   start(canvas) {
     const ctx = canvas.getContext('2d');
