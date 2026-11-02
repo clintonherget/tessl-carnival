@@ -72,9 +72,13 @@ describe('water cannon', () => {
     expect(isHit({ x: 460, y: 200, vx: 0, vy: 0 }, target)).toBe(false);
   });
 
-  it('scores a fast target higher than a slow one', () => {
-    const slow = scoreForHit({ ...target, speed: 60 });
-    const fast = scoreForHit({ ...target, speed: -180 });
-    expect(Math.max(fast, slow)).toBeGreaterThanOrEqual(slow);
+  it('scores the slow bottom rail highest and the fast top rail lowest', () => {
+    expect(scoreForHit({ ...target, speed: 60 })).toBe(30);
+    expect(scoreForHit({ ...target, speed: -120 })).toBe(20);
+    expect(scoreForHit({ ...target, speed: 180 })).toBe(10);
+  });
+
+  it('scores every hit at least 10 points', () => {
+    expect(scoreForHit({ ...target, speed: 300 })).toBe(10);
   });
 });

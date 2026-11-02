@@ -10,13 +10,15 @@ Soak the targets on the three rails before your tank runs dry.
 
 ## Scoring
 
-Each target scores 10 points for every 60 px/s of speed, rounded up:
+The big, slow targets on the bottom rail are the easiest to hit, so they score
+the most. Each target scores 10 points for every 60 px/s it moves under
+240 px/s, rounded up, and every hit scores at least 10:
 
 | Rail   | Speed    | Points |
 | ------ | -------- | ------ |
-| Top    | 180 px/s | 30     |
+| Top    | 180 px/s | 10     |
 | Middle | 120 px/s | 20     |
-| Bottom | 60 px/s  | 10     |
+| Bottom | 60 px/s  | 30     |
 
 Your final score is saved to the carnival's score board when the game ends.
 
